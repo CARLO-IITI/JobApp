@@ -298,7 +298,7 @@ const ProfilePage: React.FC = () => {
                       <Button
                         size="small"
                         startIcon={<AddIcon />}
-                        onClick={() => {/* TODO: Open add experience dialog */}}
+                        onClick={() => navigate('/edit-profile')}
                       >
                         Add
                       </Button>
@@ -318,7 +318,7 @@ const ProfilePage: React.FC = () => {
                     <Button
                       size="small"
                       startIcon={<AddIcon />}
-                      onClick={() => {/* TODO: Open add project dialog */}}
+                      onClick={() => navigate('/edit-profile')}
                     >
                       Add Project
                     </Button>
