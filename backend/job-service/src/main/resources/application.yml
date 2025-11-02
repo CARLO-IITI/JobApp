@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: job-service
+  
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:jobapp}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres123}
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  
+  # Elasticsearch disabled
+  # elasticsearch:
+  #   uris: ${ELASTICSEARCH_URL:http://localhost:9200}
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.jobapp: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO
+

@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: api-gateway
+  
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: ${USER_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/auth/**, /api/users/**
+        
+        - id: job-service
+          uri: ${JOB_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/jobs/**, /api/applications/**
+        
+        - id: matching-service
+          uri: ${MATCHING_SERVICE_URL:http://localhost:8083}
+          predicates:
+            - Path=/api/matching/**
+        
+        - id: resume-service
+          uri: ${RESUME_SERVICE_URL:http://localhost:8084}
+          predicates:
+            - Path=/api/resume/**
+      
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
